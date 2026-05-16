@@ -1,7 +1,7 @@
 {
   "$schema": "https://kurone-kito.github.io/idd-skill/schemas/policy.schema.json",
   "iddVersion": "0.1.0",
-  "markerPrefix": "{{PROJECT_MARKER_PREFIX}}",
+  "markerPrefix": "bmemb",
   "mergePolicy": "fully_autonomous_merge",
   "reviewPolicy": "copilot-advisory",
   "threadResolutionPolicy": "fast-agent-resolve",
@@ -9,12 +9,12 @@
     "staleAge": "PT18H",
     "heartbeatInterval": "PT9H"
   },
-  "trustedMarkerActors": ["{{TRUSTED_MARKER_ACTOR}}"],
+  "trustedMarkerActors": ["kurone-kito"],
   "commands": {
-    "install-deps": "{{INSTALL_DEPS_COMMAND}}",
-    "fix-validate": "{{FIX_VALIDATE_COMMANDS}}",
-    "pre-push-validate": "{{PRE_PUSH_VALIDATE_COMMANDS}}",
-    "post-fix-validate": "{{POST_FIX_VALIDATE_COMMANDS}}"
+    "install-deps": "true",
+    "fix-validate": "npx -y markdownlint-cli2-fix '**/*.md' && npx -y markdownlint-cli2 '**/*.md'",
+    "pre-push-validate": "npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'",
+    "post-fix-validate": "npx -y markdownlint-cli2-fix '**/*.md' && npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'"
   },
   "helperRuntime": {
     "profile": "vendored-node"
