@@ -1,8 +1,7 @@
 # AI tooling strategy
 
-This repository currently prioritizes GitHub Copilot because it
-provides the best latency and workflow fit for day-to-day vibe coding
-in this template.
+This repository uses AI agents to help build `bmemb`, a publicly
+distributed Unity UPM asset library for rhythm game development.
 
 ## Canonical guidance
 
@@ -17,6 +16,16 @@ in this template.
 - [GEMINI.md](../GEMINI.md) is a Gemini CLI compatibility entry point
   with the same role.
 
+## Project-specific emphasis
+
+- Public package quality matters more than fast one-off hacks.
+- Pure rhythm-game domain logic should stay testable outside Unity scene
+  setup where possible.
+- Package layout, samples, docs, and release metadata should evolve
+  together.
+- AI agents should ask before silently choosing package identity,
+  namespace roots, Unity support baselines, or breaking API changes.
+
 ## Change policy
 
 - Prefer preserving existing Copilot behavior over abstracting too
@@ -29,17 +38,6 @@ in this template.
   underlying intent so other agents can map it to their own interaction
   model.
 
-## Onboarding detection
-
-When the repository name is not `template` and the AI instruction
-files still contain the generic sentinel phrase, AI agents should
-proactively propose a customization workflow. This keeps the
-template's "vibe-coding ready" promise alive in derived projects by
-guiding users through documentation, tooling, and guideline
-specialization immediately after they create a new repository from
-the template. The full onboarding checklist is maintained in
-`.github/copilot-instructions.md` § Onboarding.
-
 ## Maintenance notes
 
 - Treat this file as a human-facing strategy note, not as the primary
@@ -47,3 +45,5 @@ the template. The full onboarding checklist is maintained in
 - When updating AI guidance, review `README.md`,
   `.github/copilot-instructions.md`, `AGENTS.md`, `CLAUDE.md`, and
   `GEMINI.md` together.
+- If the project scope expands beyond a Unity UPM rhythm-game library,
+  refresh these documents before adding major new automation.

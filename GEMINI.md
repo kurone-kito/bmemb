@@ -1,6 +1,7 @@
 # Guidelines for AI Agents
 
-This project is a language-independent generic project template.
+This repository hosts `bmemb`, a Unity UPM asset library for rhythm
+game development intended for public distribution.
 It is currently optimized for GitHub Copilot tooling, but `GEMINI.md`
 exists so Gemini CLI can still receive the minimum project rules
 immediately, without depending on a redirect.
@@ -8,14 +9,31 @@ immediately, without depending on a redirect.
 ## Immediate rules
 
 - Match the conversational language to the user's language.
-- Write comments and documentation in English unless there is a clear
-  project-specific reason otherwise.
+- Write comments and documentation in English unless the surrounding
+  file clearly uses another language.
 - If uncertainty, hidden risk, or missing context blocks a safe change,
-  stop and ask a concise question before proceeding.
+  stop and ask a concise question with recommended options before
+  proceeding.
 - Keep changes small and reviewable. If you create commits, follow the
   project's Conventional Commits rules and keep each commit atomic.
 - Do not modify community documents (`CODE_OF_CONDUCT*`,
   `CONTRIBUTING*`) without explicit approval.
+
+## Project priorities
+
+- Treat this repository as a reusable Unity package, not as a single
+  game's private project.
+- Prefer a standard UPM layout such as `package.json`, `Runtime/`,
+  `Editor/`, `Tests/`, `Samples~/`, and `Documentation~/`.
+- Keep runtime and editor code in separate assemblies.
+- Separate pure rhythm-game domain logic from Unity-facing adapters so
+  timing, chart, and judgement code remains testable.
+- Make time sources explicit and avoid hidden global state.
+- Do not silently lock in the final package name, assembly names,
+  namespace root, Unity support baseline, or serialization format
+  unless they are already established in the repository.
+- Treat public APIs, samples, and docs as one surface: when behavior
+  changes, keep them in sync.
 
 ## Project standards
 
@@ -37,26 +55,9 @@ and split unrelated changes into separate atomic commits.
 ## Branch strategy
 
 This project follows GitHub Flow. All changes reach `main` through
-pull requests (merge commits only — squash and rebase merge are
-disabled). Feature branches are always rebased onto `main`, never
+pull requests, and feature branches are rebased onto `main` rather than
 merged. See the full rules in
 [.github/copilot-instructions.md](.github/copilot-instructions.md#branch-strategy).
-
-## Onboarding detection
-
-When starting a session, check whether this repository is the base
-template or a derived project:
-
-- If the repository name is exactly `template`, it is the base
-  template — no action needed.
-- If the name differs **and** this file still contains the phrase
-  `language-independent generic project template`, the guidelines
-  have not been customized yet.
-
-In that case, **proactively propose an onboarding workflow** to
-customize the project's documentation, tooling, and AI guidelines.
-See the full onboarding checklist in
-[.github/copilot-instructions.md](.github/copilot-instructions.md).
 
 ## Canonical reference
 
