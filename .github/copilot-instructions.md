@@ -118,6 +118,69 @@ Additional rules:
 - Prefer additive, backwards-compatible changes unless the user has
   explicitly approved a breaking revision.
 
+## IDD Policy Configuration
+
+This repository uses the following IDD policies for unattended
+Issue-Driven Development work:
+
+### Merge Policy
+
+**Policy**: `fully_autonomous_merge`
+
+### PR Review Policy
+
+**Profile**: `copilot-advisory`
+
+### Review-Thread Resolution Policy
+
+**Policy**: `fast-agent-resolve`
+
+### Critique-Loop Profile
+
+**Profile**: distributed defaults
+
+### Claim Timing
+
+- **claim-stale-age**: 18 h / `PT18H`
+- **claim-heartbeat-interval**: 9 h / `PT9H`
+
+### CI Wait Policy
+
+- **running timeout**: `PT30M` / 30 min
+- **generation timeout**: `PT10M` / 10 min
+- **rerun policy**: `rerun-once`
+
+### Credential Scope
+
+**Worker credentials**: least-privilege worker scope
+
+**Merge-capable credentials**: trusted session only
+
+### Helper Runtime Profile
+
+**Profile**: `vendored-node`
+
+### Issue-Author Approval Gate
+
+- **Gate posture**: `enabled-by-default`
+- **Opt-out state**: gate remains default-enabled
+- **`maintainer-approval-actors` policy**:
+  `owners-and-maintainers-only`
+- **Approval signals**: ready label and standalone `IDD ready` comment
+- **`approvalSignals.readyLabelName`**: `idd:ready`
+- **`approvalSignals.labelFreshnessMode`**: `presence-only`
+- **Missing-approval behavior**:
+  explicit-target stop-before-claim plus discovery approval-needed
+  fallback bucket
+
+### Issue-Authoring Companion
+
+**Status**: `installed`
+
+- **`issueAuthoring.authoringLabelName`**: `status:authoring`
+- **`issueAuthoring.authoringStaleAge`**: `PT4H`
+- **`issueAuthoring.maxClarificationRounds`**: `3`
+
 ## Branch strategy
 
 This project follows

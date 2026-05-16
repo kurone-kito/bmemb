@@ -6,8 +6,8 @@
   "reviewPolicy": "copilot-advisory",
   "threadResolutionPolicy": "fast-agent-resolve",
   "claimTiming": {
-    "staleAge": "PT24H",
-    "heartbeatInterval": "PT12H"
+    "staleAge": "PT18H",
+    "heartbeatInterval": "PT9H"
   },
   "trustedMarkerActors": ["{{TRUSTED_MARKER_ACTOR}}"],
   "commands": {
@@ -17,7 +17,22 @@
     "post-fix-validate": "{{POST_FIX_VALIDATE_COMMANDS}}"
   },
   "helperRuntime": {
-    "profile": "package-manager"
+    "profile": "vendored-node"
+  },
+  "ciWait": {
+    "runningTimeout": "PT30M",
+    "generationTimeout": "PT10M",
+    "rerunPolicy": "rerun-once"
+  },
+  "maintainerApprovalActorPolicy": "owners-and-maintainers-only",
+  "approvalSignals": {
+    "readyLabelName": "idd:ready",
+    "labelFreshnessMode": "presence-only"
+  },
+  "issueAuthoring": {
+    "maxClarificationRounds": 3,
+    "authoringLabelName": "status:authoring",
+    "authoringStaleAge": "PT4H"
   },
   "issueScope": "roadmap",
   "orphanFirstPolicy": "none"
