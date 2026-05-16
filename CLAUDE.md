@@ -59,6 +59,16 @@ pull requests, and feature branches are rebased onto `main` rather than
 merged. See the full rules in
 [.github/copilot-instructions.md](.github/copilot-instructions.md#branch-strategy).
 
+## IDD Workflow
+
+This project uses Issue-Driven Development (IDD) with parallel AI
+agents. Start with [docs/idd-workflow.md](docs/idd-workflow.md) for the
+cross-agent entry path and phase routing.
+
+Before starting IDD work, open
+`.github/instructions/idd-overview.instructions.md`. Open the routed
+phase file manually when the current step changes.
+
 ## Canonical reference
 
 The full, Copilot-first project guidance lives in

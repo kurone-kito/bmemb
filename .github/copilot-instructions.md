@@ -181,6 +181,16 @@ Issue-Driven Development work:
 - **`issueAuthoring.authoringStaleAge`**: `PT4H`
 - **`issueAuthoring.maxClarificationRounds`**: `3`
 
+## IDD Workflow
+
+This project uses Issue-Driven Development (IDD) with parallel AI
+agents. Start with [docs/idd-workflow.md](../docs/idd-workflow.md) for
+the cross-agent entry path and phase routing.
+
+Before starting IDD work, open
+`.github/instructions/idd-overview.instructions.md`. Open the routed
+phase file manually when the current step changes.
+
 ## Branch strategy
 
 This project follows
