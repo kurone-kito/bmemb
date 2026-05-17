@@ -63,3 +63,10 @@ unexpected tracked changes.
 prefer project scripts; use `npx <tool>` if Node.js and `npx` are available
 and no relevant script exists; else use `true`. For other tools, use
 `true` when absent.
+
+## Marker prefix
+
+The hidden marker prefix for this repository is `bmemb`. Roadmap issues
+carry a `<!-- bmemb-roadmap-id: ... -->` marker and dependencies use
+`<!-- bmemb-blocked-by: ... -->`. See `idd-discover.instructions.md`
+for full marker syntax and discover-phase rules.
