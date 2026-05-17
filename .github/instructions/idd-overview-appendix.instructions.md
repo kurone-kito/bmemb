@@ -186,14 +186,14 @@ via `idd-template/`. When modifying any `idd-*.instructions.md` file,
 change to the corresponding file in `idd-template/`, replacing resolved
 project-specific values with their `{{placeholder}}` forms:
 
-| Live value (`.github/instructions/`)                                | Template form (`idd-template/`)  |
-| ------------------------------------------------------------------- | -------------------------------- |
-| `idd-skill` in repo-name contexts                                   | `{{REPO_NAME}}`                  |
-| `idd-skill` in marker-prefix contexts (e.g. `idd-skill-roadmap-id`) | `{{PROJECT_MARKER_PREFIX}}`      |
-| **fix-validate** command string                                     | `{{FIX_VALIDATE_COMMANDS}}`      |
-| **pre-push-validate** command string                                | `{{PRE_PUSH_VALIDATE_COMMANDS}}` |
-| **post-fix-validate** command string                                | `{{POST_FIX_VALIDATE_COMMANDS}}` |
-| **install-deps** command string                                     | `{{INSTALL_DEPS_COMMAND}}`       |
+| Live value (`.github/instructions/`)                                | Template form (`idd-template/`)                                                                                               |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `idd-skill` in repo-name contexts                                   | `bmemb`                                                                                                                       |
+| `idd-skill` in marker-prefix contexts (e.g. `idd-skill-roadmap-id`) | `bmemb`                                                                                                                       |
+| **fix-validate** command string                                     | `npx -y markdownlint-cli2 --fix '**/*.md' && npx -y markdownlint-cli2 '**/*.md'`                                              |
+| **pre-push-validate** command string                                | `npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'`                                             |
+| **post-fix-validate** command string                                | `npx -y markdownlint-cli2 --fix '**/*.md' && npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'` |
+| **install-deps** command string                                     | `true`                                                                                                                        |
 
 Match by the named command row in the Project commands table, not by
 command prefix, to avoid confusing commands that share the same

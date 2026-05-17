@@ -63,7 +63,7 @@ that issue only:
    - visible `Blocked by #NNN` references resolve to closed or otherwise
      completed issues, with unresolved references treated as blocked;
    - hidden
-     `<!-- {{PROJECT_MARKER_PREFIX}}-blocked-by: {roadmap-id} -->`
+     `<!-- bmemb-blocked-by: {roadmap-id} -->`
      markers resolve through the same scoped body-content lookup used by
      A3, and the matching roadmap work is closed or otherwise complete;
    - no external human coordination is required to start.
@@ -127,10 +127,10 @@ Search all open issues in the repository. Collect every issue whose
 body satisfies **all** of the following:
 
 - Does NOT contain any
-  `<!-- {{PROJECT_MARKER_PREFIX}}-roadmap-id: … -->` marker (the issue
+  `<!-- bmemb-roadmap-id: … -->` marker (the issue
   is not itself a roadmap).
 - Does NOT contain any
-  `<!-- {{PROJECT_MARKER_PREFIX}}-blocked-by: … -->` marker.
+  `<!-- bmemb-blocked-by: … -->` marker.
 - Does NOT have a `status:blocked-by-human` or `status:needs-decision`
   label.
 - Does NOT have the configured authoring label.
@@ -199,14 +199,14 @@ by the `roadmap` label (project field) or by recognizing it as an
 umbrella issue. If no roadmap issue exists, report and abort.
 
 **Note**: Repo-wide or label-based issue queries are permitted only in
-**A0-T** (the scoped `{{PROJECT_MARKER_PREFIX}}-roadmap-id` lookup
+**A0-T** (the scoped `bmemb-roadmap-id` lookup
 needed to resolve the explicit target's
-`{{PROJECT_MARKER_PREFIX}}-blocked-by` markers),
+`bmemb-blocked-by` markers),
 **A0-O** (when `issue-scope` is `orphan-first`, to find orphan issues),
 **A1** (to locate the roadmap), **A1.5** (narrow duplicate/reuse lookup
 for one specific autonomous gap), and **A3** (narrow body-content lookup
-for `{{PROJECT_MARKER_PREFIX}}-roadmap-id` to resolve
-`{{PROJECT_MARKER_PREFIX}}-blocked-by` dependency markers; see A2 for
+for `bmemb-roadmap-id` to resolve
+`bmemb-blocked-by` dependency markers; see A2 for
 details). Outside these contexts, repo-wide and label-based queries are
 prohibited.
 
@@ -247,13 +247,13 @@ include only **open** issues in the A2 candidate set.
 touch issues outside the roadmap traversal graph:
 
 - **A0-T only**: the scoped body-content lookup needed to resolve
-  `{{PROJECT_MARKER_PREFIX}}-blocked-by` markers on the explicit target.
+  `bmemb-blocked-by` markers on the explicit target.
   The result is used solely to determine targeted readiness and is not
   added to any candidate set.
 - **A0-O only** (when `issue-scope` is `orphan-first`): a repo-wide
   open-issue query to find issues without
-  `{{PROJECT_MARKER_PREFIX}}-roadmap-id` or
-  `{{PROJECT_MARKER_PREFIX}}-blocked-by` markers.
+  `bmemb-roadmap-id` or
+  `bmemb-blocked-by` markers.
 - **A1 only**: any method (including `gh issue list`, `gh search`, or
   label-based queries) to locate the roadmap issue itself.
 - **A1.5 only**: a narrow duplicate/reuse lookup for one specific
@@ -262,8 +262,8 @@ touch issues outside the roadmap traversal graph:
   duplicate; it must not be added to the A2 candidate set.
 - **A3 only**: a body-content search (e.g.,
   `gh search issues --match-body`) to find the issue with a matching
-  `{{PROJECT_MARKER_PREFIX}}-roadmap-id` marker when checking
-  `{{PROJECT_MARKER_PREFIX}}-blocked-by` dependency markers (see A3
+  `bmemb-roadmap-id` marker when checking
+  `bmemb-blocked-by` dependency markers (see A3
   below). The result is used solely to determine blocked status and is
   not added to the A2 candidate set.
 - **A4.5 only**: a narrow duplicate/reuse search for the candidate
@@ -308,9 +308,9 @@ From A2, keep only issues that satisfy **all** of the following:
   body — if any referenced issue is open, treat as blocked; if a
   reference cannot be resolved (issue not found or inaccessible), treat
   as blocked (fail-safe); (b) hidden
-  `<!-- {{PROJECT_MARKER_PREFIX}}-blocked-by: {roadmap-id} -->` markers
+  `<!-- bmemb-blocked-by: {roadmap-id} -->` markers
   — for each `{roadmap-id}`, find the issue whose body contains
-  `<!-- {{PROJECT_MARKER_PREFIX}}-roadmap-id: {roadmap-id} -->`. If that
+  `<!-- bmemb-roadmap-id: {roadmap-id} -->`. If that
   issue is open, treat as blocked. If no issue matches the roadmap-id,
   treat as blocked (fail-safe — an unmatched marker indicates a
   migration integrity problem such as a typo, deleted issue, or
@@ -338,7 +338,7 @@ scope:
 
    **Diagnostic — all candidates blocked by an open roadmap**: if every
    candidate is blocked because its
-   `<!-- {{PROJECT_MARKER_PREFIX}}-blocked-by: X -->` marker points to a
+   `<!-- bmemb-blocked-by: X -->` marker points to a
    roadmap issue that is still open, the markers are likely misused as
    grouping tags rather than as true sequential dependencies. Sub-tasks
    that should be worked on while the roadmap is open belong in the
@@ -511,16 +511,16 @@ mutation policy, coordination rules, decision flow, and edge cases.
 Two hidden HTML comment markers are used in issue bodies to support the
 discover phase:
 
-- **Roadmap identity** (`{{PROJECT_MARKER_PREFIX}}-roadmap-id`): placed
+- **Roadmap identity** (`bmemb-roadmap-id`): placed
   in the roadmap issue body. A3 uses this marker to resolve `blocked-by`
   dependency lookups. A1 identifies the roadmap by its `roadmap` label
   or umbrella structure — not by this marker.
-- **Sequential dependency** (`{{PROJECT_MARKER_PREFIX}}-blocked-by`):
+- **Sequential dependency** (`bmemb-blocked-by`):
   placed in an issue body to express a hard dependency — this issue
   **cannot start until** the roadmap with the matching `roadmap-id` is
   closed.
 
-**Do not use `{{PROJECT_MARKER_PREFIX}}-blocked-by` to group sub-tasks
+**Do not use `bmemb-blocked-by` to group sub-tasks
 under an active roadmap.** Sub-tasks that should be worked on while the
 roadmap is open belong in the roadmap's task list as `- [ ] #NNN`
 entries. The `blocked-by` marker is reserved for issues that must wait
