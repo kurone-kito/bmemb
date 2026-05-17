@@ -122,7 +122,9 @@ $RECYCLE.BIN/
 # Claude Code local config
 .claude/
 !.claude/
+.claude/*
 !.claude/skills/
+.claude/skills/*
 !.claude/skills/issue-authoring/
 !.claude/skills/issue-authoring/**
 
