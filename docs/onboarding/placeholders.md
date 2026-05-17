@@ -14,12 +14,12 @@ This page is the detailed companion for:
 Before asking the operator to type values manually, inspect the target
 repository and propose candidate values for the placeholders below.
 
-### `{{REPO_NAME}}`
+### `bmemb` — repo name
 
 Read the repository short name from the git remote or GitHub API. The
 remote name is the most reliable source.
 
-### `{{PROJECT_MARKER_PREFIX}}`
+### `bmemb` — marker prefix
 
 Start from the repository name, lowercase it, and normalize it into a
 short hyphenated marker prefix. The final value must match:
@@ -30,7 +30,7 @@ short hyphenated marker prefix. The final value must match:
 
 That means 2-32 characters, lowercase, starting with a letter.
 
-### `{{TRUSTED_MARKER_ACTOR}}`
+### `kurone-kito`
 
 List the GitHub logins allowed to post trusted IDD markers in
 `.github/idd/config.json`. This placeholder is intentionally singular:
@@ -50,7 +50,7 @@ trusted claim, release, watermark, baseline, and advisory markers for
 the target repository. Keep the value aligned with any helper
 invocations that pass `--trusted-marker-logins`.
 
-### `{{INSTALL_DEPS_COMMAND}}`
+### `true`
 
 Look for the target repository's dependency tooling and propose the
 matching install command:
@@ -72,7 +72,7 @@ matching install command:
 If both `pyproject.toml` and `requirements.txt` are present, confirm
 which workflow should drive the IDD command rows.
 
-### `{{FIX_VALIDATE_COMMANDS}}`
+### `npx -y markdownlint-cli2 --fix '**/*.md' && npx -y markdownlint-cli2 '**/*.md'`
 
 Propose an auto-fix plus validate sequence that matches the existing
 tooling. Common patterns:
@@ -86,7 +86,7 @@ tooling. Common patterns:
 - Rust: `cargo fmt`
 - no relevant auto-fix tooling: `true`
 
-### `{{PRE_PUSH_VALIDATE_COMMANDS}}`
+### `npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'`
 
 Propose a non-mutating lint/build/test sequence. Common patterns:
 
@@ -99,7 +99,7 @@ Propose a non-mutating lint/build/test sequence. Common patterns:
 - Rust: `cargo check && cargo test`
 - no relevant verification command: `true`
 
-### `{{POST_FIX_VALIDATE_COMMANDS}}`
+### `npx -y markdownlint-cli2 --fix '**/*.md' && npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'`
 
 Usually a superset of `fix-validate` and `pre-push-validate`.
 
@@ -117,15 +117,15 @@ For the full fallback order and policy matrix, see
 After Step 1A and Step 1C, you should have final values for these seven
 placeholders:
 
-| Placeholder                      | Meaning                                                   | Example                            |
-| -------------------------------- | --------------------------------------------------------- | ---------------------------------- |
-| `{{REPO_NAME}}`                  | Repository short name used in worktree examples           | `my-app`                           |
-| `{{PROJECT_MARKER_PREFIX}}`      | Hidden issue-body marker prefix                           | `my-app`                           |
-| `{{TRUSTED_MARKER_ACTOR}}`       | Single JSON-escaped login allowed to post trusted markers | `trusted-user-a`                   |
-| `{{FIX_VALIDATE_COMMANDS}}`      | Auto-fix plus validate command row                        | `npm run lint:fix && npm run lint` |
-| `{{PRE_PUSH_VALIDATE_COMMANDS}}` | Non-mutating verify command row                           | `npm run lint && npm run test`     |
-| `{{POST_FIX_VALIDATE_COMMANDS}}` | Post-fix validate command row                             | `npm run lint:fix && npm test`     |
-| `{{INSTALL_DEPS_COMMAND}}`       | Dependency install command, or `true` when unnecessary    | `npm install`                      |
+| Placeholder | Meaning | Example |
+| --- | --- | --- |
+| `bmemb` | Repository short name used in worktree examples | `my-app` |
+| `bmemb` | Hidden issue-body marker prefix | `my-app` |
+| `kurone-kito` | Single JSON-escaped login allowed to post trusted markers | `trusted-user-a` |
+| `npx -y markdownlint-cli2 --fix '**/*.md' && npx -y markdownlint-cli2 '**/*.md'` | Auto-fix plus validate command row | `npm run lint:fix && npm run lint` |
+| `npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'` | Non-mutating verify command row | `npm run lint && npm run test` |
+| `npx -y markdownlint-cli2 --fix '**/*.md' && npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'` | Post-fix validate command row | `npm run lint:fix && npm test` |
+| `true` | Dependency install command, or `true` when unnecessary | `npm install` |
 
 ### No-op substitution
 
@@ -133,21 +133,21 @@ Only the command placeholders may be set to `true` when a step does not
 apply to the target project. For example:
 
 - no dependency install step →
-  `{{INSTALL_DEPS_COMMAND}} = true`
+  `true = true`
 - no relevant auto-fix command →
-  `{{FIX_VALIDATE_COMMANDS}} = true`
+  set the **fix-validate** command to `true`
 
-Keep `{{INSTALL_DEPS_COMMAND}}` safe to rerun across retries, takeovers,
+Keep `true` safe to rerun across retries, takeovers,
 and recreated worktrees.
 
 ## Marker prefix notes
 
-`{{PROJECT_MARKER_PREFIX}}` appears in two hidden issue-body markers:
+`bmemb` appears in two hidden issue-body markers:
 
 - roadmap identity marker:
-  `<!-- {{PROJECT_MARKER_PREFIX}}-roadmap-id: {unique-id} -->`
+  `<!-- bmemb-roadmap-id: {unique-id} -->`
 - blocked-by marker:
-  `<!-- {{PROJECT_MARKER_PREFIX}}-blocked-by: {roadmap-id} -->`
+  `<!-- bmemb-blocked-by: {roadmap-id} -->`
 
 Validate a proposed prefix with:
 

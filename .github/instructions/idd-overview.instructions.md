@@ -36,14 +36,14 @@ the recorded machine-readable policy. Absent values keep the gate
 enabled and default approval actors to
 `owners-and-maintainers-only`.
 
-| Name                    | Commands                         |
-| ----------------------- | -------------------------------- |
-| **fix-validate**        | `{{FIX_VALIDATE_COMMANDS}}`      |
-| **pre-push-validate**   | `{{PRE_PUSH_VALIDATE_COMMANDS}}` |
-| **post-fix-validate**   | `{{POST_FIX_VALIDATE_COMMANDS}}` |
-| **install-deps**        | `{{INSTALL_DEPS_COMMAND}}`       |
-| **issue-scope**         | `roadmap`                        |
-| **orphan-first-policy** | `none`                           |
+| Name                    | Commands                                                                                                                      |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **fix-validate**        | `npx -y markdownlint-cli2 --fix '**/*.md' && npx -y markdownlint-cli2 '**/*.md'`                                              |
+| **pre-push-validate**   | `npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'`                                             |
+| **post-fix-validate**   | `npx -y markdownlint-cli2 --fix '**/*.md' && npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'` |
+| **install-deps**        | `true`                                                                                                                        |
+| **issue-scope**         | `roadmap`                                                                                                                     |
+| **orphan-first-policy** | `none`                                                                                                                        |
 
 Non-shell rows such as **issue-scope** and **orphan-first-policy** are
 workflow settings. Read them literally, not as commands.
