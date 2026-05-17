@@ -195,3 +195,62 @@ git config commit.template .gitmessage
 - Separate refactoring from behavior changes
 - Separate formatting churn from functional work
 - Separate dependency updates from code changes when practical
+
+## IDD Policy Configuration
+
+This repository uses Issue-Driven Development (IDD). Future IDD sessions
+should read `docs/idd-workflow.md` first. The recorded policy decisions
+are listed below and mirrored in `.github/idd/config.json`.
+
+### Merge Policy
+
+**Policy**: `fully_autonomous_merge` — one trusted agent session may
+execute merge phase F3 after all CI, advisory, and review gates pass.
+
+### PR Review Policy
+
+**Profile**: `copilot-advisory` (distributed default)
+
+### Review-Thread Resolution Policy
+
+**Policy**: `fast-agent-resolve` (distributed default)
+
+### Critique-Loop Profile
+
+**Profile**: distributed defaults
+
+### Claim Timing
+
+- **claim-stale-age**: 18 h (override; default 24 h — tighter for
+  early-development velocity)
+- **claim-heartbeat-interval**: 9 h (override; default 12 h)
+
+### CI Wait Policy
+
+- **running timeout**: `PT30M` / 30 min (default)
+- **generation timeout**: `PT10M` / 10 min (default)
+- **rerun policy**: `rerun-once` (default)
+
+### Credential Scope
+
+**Worker credentials**: least-privilege (read + PR create/update)
+
+**Merge-capable credentials**: same session as worker
+(`fully_autonomous_merge`)
+
+### Helper Runtime Profile
+
+**Profile**: `instructions-only` (pending helper vendoring in issue #7;
+will move to `vendored-node` after that lands)
+
+### Issue-Author Approval Gate
+
+- **Gate posture**: `enabled-by-default`
+- **`maintainer-approval-actors` policy**: `owners-and-maintainers-only`
+
+### Issue-Authoring Companion
+
+**Status**: `installed`
+
+- `.claude/skills/issue-authoring/` — Claude Code runtime
+- `.github/skills/issue-authoring/` — Copilot runtime
