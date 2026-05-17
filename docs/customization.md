@@ -656,8 +656,8 @@ sources.
 
 **Instruction Files**:
 
-- `.github/instructions/idd-*.md` → canonical source for IDD phase files and
-  shared definitions
+- `.github/instructions/idd-*.instructions.md` → canonical source for
+  IDD phase files and shared definitions
 
 ### Generated/Synchronized Assets
 
@@ -705,7 +705,7 @@ template copies.
 
 1. Update the file in its canonical location:
    - Policy guidance → `docs/customization.md`, `docs/policy-constants.md`, etc.
-   - Instruction files → `.github/instructions/idd-*.md`
+   - Instruction files → `.github/instructions/idd-*.instructions.md`
 
 2. If the repository distributes IDD as a template (source of a reusable IDD
    distribution), run the documentation audit check:

@@ -67,8 +67,8 @@ the loop starts:
 For broad requests, use the optional issue-authoring companion to draft
 a roadmap and focused child issues before starting the execution loop.
 Use task-list links to group active roadmap work. Reserve
-`idd-skill-blocked-by` markers for true sequential dependencies on a
-separate roadmap.
+`{{PROJECT_MARKER_PREFIX}}-blocked-by` markers for true sequential
+dependencies on a separate roadmap.
 
 ## 4. Start the Loop
 
