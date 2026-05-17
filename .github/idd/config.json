@@ -18,7 +18,7 @@
     "post-fix-validate": "npx -y markdownlint-cli2 --fix '**/*.md' && npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'"
   },
   "helperRuntime": {
-    "profile": "instructions-only"
+    "profile": "vendored-node"
   },
   "issueScope": "roadmap",
   "orphanFirstPolicy": "none"
