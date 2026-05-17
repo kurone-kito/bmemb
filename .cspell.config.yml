@@ -23,7 +23,13 @@ useGitignore: true
 version: '0.2'
 words:
   - bmemb
+  - isort
   - kito
   - kuron
   - kurone
   - kuroné
+  - pylint
+  - pyproject
+  - pytest
+  - unreplied
+  - unpushed

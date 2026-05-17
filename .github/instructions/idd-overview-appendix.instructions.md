@@ -183,17 +183,18 @@ as a structured self-review step within the same response.
 This repository is the canonical source of the IDD template distributed
 via `idd-template/`. When modifying any `idd-*.instructions.md` file,
 `docs/idd-workflow.md`, or `docs/customization.md`, apply the equivalent
-change to the corresponding file in `idd-template/`, replacing resolved
-project-specific values with their `{{placeholder}}` forms:
+change to the corresponding file in `idd-template/`, converting this
+repository's concrete values back into the matching template
+placeholders and command slots:
 
-| Live value (`.github/instructions/`)                                | Template form (`idd-template/`)  |
-| ------------------------------------------------------------------- | -------------------------------- |
-| `idd-skill` in repo-name contexts                                   | `bmemb`                  |
-| `idd-skill` in marker-prefix contexts (e.g. `idd-skill-roadmap-id`) | `bmemb`      |
-| **fix-validate** command string                                     | `npx -y markdownlint-cli2-fix '**/*.md' && npx -y markdownlint-cli2 '**/*.md'`      |
-| **pre-push-validate** command string                                | `npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'` |
-| **post-fix-validate** command string                                | `npx -y markdownlint-cli2-fix '**/*.md' && npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'` |
-| **install-deps** command string                                     | `true`       |
+| Live value in this repository                                 | Template-side equivalent                                               |
+| ------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `bmemb` in repo-name contexts                                 | repository short-name placeholder                                      |
+| `bmemb` in marker-prefix contexts (e.g. `bmemb-roadmap-id`)   | marker-prefix placeholder                                              |
+| **fix-validate** command string                               | repository-specific **fix-validate** command placeholder               |
+| **pre-push-validate** command string                          | repository-specific **pre-push-validate** command placeholder          |
+| **post-fix-validate** command string                          | repository-specific **post-fix-validate** command placeholder          |
+| **install-deps** command string                               | repository-specific **install-deps** command placeholder               |
 
 Match by the named command row in the Project commands table, not by
 command prefix, to avoid confusing commands that share the same

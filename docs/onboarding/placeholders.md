@@ -14,12 +14,12 @@ This page is the detailed companion for:
 Before asking the operator to type values manually, inspect the target
 repository and propose candidate values for the placeholders below.
 
-### `bmemb`
+### Repository name value (`bmemb`)
 
 Read the repository short name from the git remote or GitHub API. The
 remote name is the most reliable source.
 
-### `bmemb`
+### Marker prefix value (`bmemb`)
 
 Start from the repository name, lowercase it, and normalize it into a
 short hyphenated marker prefix. The final value must match:
@@ -30,7 +30,7 @@ short hyphenated marker prefix. The final value must match:
 
 That means 2-32 characters, lowercase, starting with a letter.
 
-### `kurone-kito`
+### Trusted marker actor value (`kurone-kito`)
 
 List the GitHub logins allowed to post trusted IDD markers in
 `.github/idd/config.json`. This placeholder is intentionally singular:
@@ -50,7 +50,7 @@ trusted claim, release, watermark, baseline, and advisory markers for
 the target repository. Keep the value aligned with any helper
 invocations that pass `--trusted-marker-logins`.
 
-### `true`
+### Install command value (`true`)
 
 Look for the target repository's dependency tooling and propose the
 matching install command:
@@ -72,7 +72,7 @@ matching install command:
 If both `pyproject.toml` and `requirements.txt` are present, confirm
 which workflow should drive the IDD command rows.
 
-### `npx -y markdownlint-cli2-fix '**/*.md' && npx -y markdownlint-cli2 '**/*.md'`
+### `fix-validate` value
 
 Propose an auto-fix plus validate sequence that matches the existing
 tooling. Common patterns:
@@ -86,7 +86,7 @@ tooling. Common patterns:
 - Rust: `cargo fmt`
 - no relevant auto-fix tooling: `true`
 
-### `npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'`
+### `pre-push-validate` value
 
 Propose a non-mutating lint/build/test sequence. Common patterns:
 
@@ -99,7 +99,7 @@ Propose a non-mutating lint/build/test sequence. Common patterns:
 - Rust: `cargo check && cargo test`
 - no relevant verification command: `true`
 
-### `npx -y markdownlint-cli2-fix '**/*.md' && npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'`
+### `post-fix-validate` value
 
 Usually a superset of `fix-validate` and `pre-push-validate`.
 
@@ -117,28 +117,28 @@ For the full fallback order and policy matrix, see
 After Step 1A and Step 1C, you should have final values for these seven
 placeholders:
 
-| Placeholder                      | Meaning                                                   | Example                            |
-| -------------------------------- | --------------------------------------------------------- | ---------------------------------- |
-| `bmemb`                  | Repository short name used in worktree examples           | `my-app`                           |
-| `bmemb`      | Hidden issue-body marker prefix                           | `my-app`                           |
-| `kurone-kito`       | Single JSON-escaped login allowed to post trusted markers | `trusted-user-a`                   |
-| `npx -y markdownlint-cli2-fix '**/*.md' && npx -y markdownlint-cli2 '**/*.md'`      | Auto-fix plus validate command row                        | `npm run lint:fix && npm run lint` |
-| `npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'` | Non-mutating verify command row                           | `npm run lint && npm run test`     |
-| `npx -y markdownlint-cli2-fix '**/*.md' && npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'` | Post-fix validate command row                             | `npm run lint:fix && npm test`     |
-| `true`       | Dependency install command, or `true` when unnecessary    | `npm install`                      |
+|Setting|Meaning|Value|
+|---|---|---|
+|Repository name|Repository short name used in worktree examples|`bmemb`|
+|Marker prefix|Hidden issue-body marker prefix|`bmemb`|
+|Trusted marker actor|Single JSON-escaped login allowed to post trusted markers|`kurone-kito`|
+|`fix-validate`|Auto-fix plus validate command row|`npx -y markdownlint-cli2 --fix '**/*.md' && npx -y markdownlint-cli2 '**/*.md'`|
+|`pre-push-validate`|Non-mutating verify command row|`npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'`|
+|`post-fix-validate`|Post-fix validate command row|`npx -y markdownlint-cli2 --fix '**/*.md' && npx -y cspell --no-progress --gitignore . && npx -y markdownlint-cli2 '**/*.md'`|
+|`install-deps`|Dependency install command, or `true` when unnecessary|`true`|
 
 ### No-op substitution
 
-Only the command placeholders may be set to `true` when a step does not
-apply to the target project. For example:
+Only the command rows may be set to `true` when a step does not apply
+to the target project. For example:
 
 - no dependency install step →
-  `true = true`
+  `install-deps = true`
 - no relevant auto-fix command →
-  `npx -y markdownlint-cli2-fix '**/*.md' && npx -y markdownlint-cli2 '**/*.md' = true`
+  `fix-validate = true`
 
-Keep `true` safe to rerun across retries, takeovers,
-and recreated worktrees.
+Keep `true` safe to rerun across retries, takeovers, and recreated
+worktrees.
 
 ## Marker prefix notes
 
