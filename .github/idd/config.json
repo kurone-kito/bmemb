@@ -1,6 +1,7 @@
 {
   "$schema": "https://kurone-kito.github.io/idd-skill/schemas/policy.schema.json",
   "iddVersion": "0.1.0",
+  "markerPrefix": "bmemb",
   "mergePolicy": "fully_autonomous_merge",
   "reviewPolicy": "copilot-advisory",
   "threadResolutionPolicy": "fast-agent-resolve",
@@ -8,6 +9,8 @@
     "staleAge": "PT18H",
     "heartbeatInterval": "PT9H"
   },
+  "trustedMarkerActors": ["kurone-kito"],
+  "maintainerApprovalActorPolicy": "owners-and-maintainers-only",
   "commands": {
     "install-deps": "true",
     "fix-validate": "npx -y markdownlint-cli2 --fix '**/*.md' && npx -y markdownlint-cli2 '**/*.md'",
