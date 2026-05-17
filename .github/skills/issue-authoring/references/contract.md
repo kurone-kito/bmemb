@@ -11,8 +11,8 @@ roadmap or blocked-by marker.
 
 - Use the prefix documented by the target repository's onboarding or
   IDD instructions.
-- In this source repository the prefix is `idd-skill`, but installed
-  bundles must not assume that value elsewhere.
+- Do not assume a fixed prefix value in installed bundles; always
+  resolve from the target repository.
 - If the prefix is not discoverable from the repository docs or user
   context, stop and ask instead of emitting a guessed marker.
 
