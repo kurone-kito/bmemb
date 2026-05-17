@@ -184,7 +184,7 @@ This repository is the canonical source of the IDD template distributed
 via `idd-template/`. When modifying any `idd-*.instructions.md` file,
 `docs/idd-workflow.md`, or `docs/customization.md`, apply the equivalent
 change to the corresponding file in `idd-template/`, replacing resolved
-project-specific values with their `{{placeholder}}` forms:
+project-specific values with their `{{...}}` template forms:
 
 | Live value (`.github/instructions/`)                                | Template form (`idd-template/`)                                                                                               |
 | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
