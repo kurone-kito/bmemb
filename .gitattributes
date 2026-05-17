@@ -14,3 +14,17 @@
 .gitattributes export-ignore
 .gitignore export-ignore
 .imgbotconfig export-ignore
+
+# IDD bundle (vendored from github:kurone-kito/idd-skill)
+.github/instructions/idd-*.instructions.md linguist-vendored
+.github/idd/** linguist-vendored
+docs/cleanup-hygiene-report.md linguist-vendored
+docs/idd-*.md linguist-vendored
+docs/onboarding/** linguist-vendored
+profiles/** linguist-vendored
+schemas/*.json linguist-vendored
+scripts/*.mjs linguist-vendored
+
+# Issue-authoring companion (vendored)
+.claude/skills/issue-authoring/** linguist-vendored
+.github/skills/issue-authoring/** linguist-vendored
