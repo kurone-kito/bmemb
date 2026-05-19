@@ -9,11 +9,11 @@ behave. The schema explains what a ready orphan issue, roadmap issue,
 or sub-issue must contain so the later IDD discover phase can consume
 the result safely.
 
-The canonical bundle in this repository lives at
-`skills/issue-authoring/`. When adopters install it in another
-repository, they should copy it into the agent-specific skill directory
-their runtime reads, such as `.github/skills/`, `.claude/skills/`, or
-`.agents/skills/`.
+The installed bundles in this repository live at
+`.github/skills/issue-authoring/` and `.claude/skills/issue-authoring/`.
+When adopters install it in another repository, they should copy it into
+the agent-specific skill directory their runtime reads, such as
+`.github/skills/`, `.claude/skills/`, or `.agents/skills/`.
 
 ## Purpose
 
@@ -24,9 +24,10 @@ issue hygiene that IDD depends on.
 The skill exists to improve issue quality before execution, especially
 when work will span multiple tasks, dependencies, or agent sessions.
 
-It is a source bundle, not the execution loop itself: the bundle lives
-in `skills/issue-authoring/` here, while installed copies belong in the
-skill directory for the runtime that will load them.
+It is a source bundle, not the execution loop itself: the installed
+copies live in `.github/skills/issue-authoring/` and
+`.claude/skills/issue-authoring/` here, while the skill directory for
+the runtime that will load them is the canonical install location.
 
 ## Trigger policy
 
@@ -556,7 +557,7 @@ Validation expectations:
   issue
 - the draft preserves discoverability by using a repository configured
   for `issue-scope: orphan-first`, or by surfacing that configuration
-  change before the operator starts the Discover -> Claim loop
+  change before the operator starts the Discover → Claim loop
 - when the repository uses `orphan-first-policy: maintainer-approved`,
   the draft includes a post-publication maintainer approval step after
   the final title, body, and generated plan are stable
@@ -654,12 +655,13 @@ Before reporting or publishing issue drafts, the skill should verify:
 ## Repository-local implementation surface
 
 This document is the canonical contract and schema for the repository's
-native issue authoring bundle at `skills/issue-authoring/`.
+native issue authoring bundles at `.github/skills/issue-authoring/` and
+`.claude/skills/issue-authoring/`.
 
 Keep the implementation split on purpose:
 
-- `skills/issue-authoring/SKILL.md` should stay concise and point back
-  here for the normative rules, output schemas, and validation checklist
+- `SKILL.md` in each bundle should stay concise and point back here for
+  the normative rules, output schemas, and validation checklist
 - `.github/instructions/*.instructions.md` remain the execution-layer
   files for the normal IDD loop after issue drafting is approved
 
