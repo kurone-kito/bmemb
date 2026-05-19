@@ -89,6 +89,14 @@ merges:
 Do not use issue-author approval, trusted operational markers, or
 CODEOWNERS mismatch as substitutes for a satisfiable GitHub merge gate.
 
+In a solo-maintainer repository, the waiver comment is the auditable
+authorization path for a stuck external check. The PR author cannot rely
+on self-approval, and an ordinary approval would still be too weak
+because it does not bind a check selector, active claim, PR HEAD, or
+expiry. The maintainer should inspect the helper's dry-run output and
+post the canonical comment through the facade instead of hand-writing
+marker text.
+
 ## Phase Permissions
 
 Each IDD phase needs a different subset of access:
