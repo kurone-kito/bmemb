@@ -21,5 +21,9 @@
     "profile": "vendored-node"
   },
   "issueScope": "roadmap",
-  "orphanFirstPolicy": "none"
+  "orphanFirstPolicy": "none",
+  "forcedHandoff": {
+    "mode": "human-gated",
+    "authorityPolicy": "owners-and-maintainers-only"
+  }
 }
