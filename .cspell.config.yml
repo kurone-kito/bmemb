@@ -33,5 +33,6 @@ words:
   - pylint
   - pytest
   - unpushed
+  - Esync
   - unreplied
   - waivable
