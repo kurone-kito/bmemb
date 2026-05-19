@@ -199,7 +199,7 @@ workers.
 
 Policy foundation namespaces are available in `.github/idd/config.json`
 for parameterized follow-up work: `stallRecovery`, `forcedHandoff`,
-`markerTrust`, `advisoryWait`, `ciWait`, `discover`, `claim`,
+`markerTrust`, `advisoryWait`, `ciWait`, `ciGate`, `discover`, `claim`,
 `critiqueLoop`, `reviewEscalation`, `approvalSignals`, and
 `issueAuthoring`. Leaving these keys unset keeps distributed behavior.
 
